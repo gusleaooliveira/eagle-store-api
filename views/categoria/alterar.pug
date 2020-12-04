@@ -1,0 +1,16 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    form(action="", onsubmit="return false", method="post")
+        div.container-fluid
+            label(for="id") Selecione a categoria:
+            select(id="idCategoria", class="form-control")
+                each item in valores
+                    option(value=item.id) #{item.categoria}
+            +input("text","icone","Digite a seu icone","Icone:")
+            +input("text","categoria","Digite a sua categoria","Categoria:")
+            input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('PUT', 'categoria')")
+
+
+include ../rodape

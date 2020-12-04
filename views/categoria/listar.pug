@@ -1,0 +1,14 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    table(class="table striped")
+        tr
+            th Categoria
+        each item in valores
+            tr
+                td 
+                    a(href="/view/categoria/listar/"+item.id) #{item.categoria}
+
+
+include ../rodape

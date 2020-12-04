@@ -1,0 +1,82 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    if valores == null
+        p Escolha um
+            a(href="/view/aplicativo/listar/") aplicativo
+    else 
+    
+        div.container
+            div.row
+                div.col-sm-12.col-md-12.col-lg-12
+                    h3.text-center #{valores.nome}
+            div.row
+                div.col-sm-12.col-md-12.col-lg-12
+                    h5.text-center #{valores.slogan}
+            div.row
+                div.col-sm-12.col-md-12.col-lg-12
+                    pre #{valores.descricao}
+
+            div.row
+                div.col-sm-12.col-md-3.col-lg-6
+                    p 
+                        b Licença: 
+                        span #{valores.licenca}
+                div.col-sm-12.col-md-3.col-lg-6 
+                    p 
+                        b Versão:
+                        span #{valores.versao}
+            
+
+            div.row
+                div.col-sm-12.col-md-12.col-lg-12
+                    p Categorias:
+                    each item in valores.categorias
+                        a(href="/view/categoria/listar/"+item.id) #{item.categoria}
+            
+            fieldset.container-fluid
+                legend Pacote snap:
+            
+                div.row
+                    div.col-sm-10.col-md-10.col-lg-10
+                            input(type="text", readonly, class="form-control", id="comandoEstavel" value=valores.comandoSnap[0])
+                    div.col-sm-2.col-md-2.col-lg-2
+                        button(type="button", class="btn btn-block btn-info", data-toggle="tooltip", data-placement="top", title="Copiar o comando", onclick="copy('comandoEstavel')") 
+                            +icon("copy")
+                br
+                div.row
+                    div.col-sm-10.col-md-10.col-lg-10
+                            input(type="text", readonly, class="form-control", id="comandoEdge" value=valores.comandoSnap[1])
+                    div.col-sm-2.col-md-2.col-lg-2
+                        button(type="button", class="btn btn-block btn-info", data-toggle="tooltip", data-placement="top", title="Copiar o comando", onclick="copy('comandoEdge')") 
+                            +icon("copy")
+                br
+                div.row
+                    div.col-sm-10.col-md-10.col-lg-10
+                            input(type="text", readonly, class="form-control", id="comandoBeta" value=valores.comandoSnap[2])
+                    div.col-sm-2.col-md-2.col-lg-2
+                        button(type="button", class="btn btn-block btn-info", data-toggle="tooltip", data-placement="top", title="Copiar o comando", onclick="copy('comandoBeta')") 
+                            +icon("copy")
+                br
+                div.row
+                    div.col-sm-10.col-md-10.col-lg-10
+                            input(type="text", readonly, class="form-control", id="comandoCandidate" value=valores.comandoSnap[3])
+                    div.col-sm-2.col-md-2.col-lg-2
+                        button(type="button", class="btn btn-block btn-info", data-toggle="tooltip", data-placement="top", title="Copiar o comando", onclick="copy('comandoCandidate')") 
+                            +icon("copy")
+                br
+
+            fieldset.container-fluid
+                    legend Pacote flatapak:
+                    div.row
+                        div.col-sm-10.col-md-10.col-lg-10
+                            input(type="text", readonly, class="form-control", id="comandoFlatpak" value=valores.comandoFlatpak)
+                        div.col-sm-2.col-md-2.col-lg-2
+                            button(type="button", class="btn btn-block btn-info", data-toggle="tooltip", data-placement="top", title="Copiar o comando", onclick="copy('comandoFlatpak')") 
+                                +icon("copy")
+
+                            
+
+
+include ../rodape

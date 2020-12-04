@@ -1,0 +1,10 @@
+include ../cabecalho 
+include ../menu
+
+form(action="", onsubmit="return false", method="post")
+    div.container-fluid
+        +input("text","icone","Digite a seu icone","Ícone:")
+        +input("text","categoria","Digite a sua categoria","Categoria:")
+        input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('POST', 'categoria')")
+
+include ../rodape

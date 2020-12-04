@@ -1,0 +1,39 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    form(action="", onsubmit="return false", method="post")
+        div.container-fluid
+            label(for="idCategoria") Selecione a categoria:
+            select(id="idCategoria", class="form-control")
+                each item in valores
+                    option(value=item.id) #{item.categoria}
+                    if item.categoria == 'Todos'
+                        input(type="hidden", id="idCategoriaTodos", value=item.id)
+            
+            +input("text","nome","Digite o nome do aplicativo","Nome:")
+            +input("text","slogan","Digite o slogan do aplicativo","Slogan:")
+            
+            label(for="descricao") Descrição:
+            textarea(class="form-control", id="descricao", placeholder="Digite o descrição do aplicativo" cols="60", rows="30")
+
+            label(for="versao") Versão:
+            input(type="number",id="versao", placeholder="Digite a versão do aplicativo", class="form-control", min="0", step="0.01")
+            
+            +input("text","licenca","Digite a licença do aplicativo","Licença:")
+            
+            fieldset.container-fluid
+                legend Pacote snap:
+                +input("text","estavel","Digite o comando da versão padrão do aplicativo","Versão estável:")
+                +input("text","edge","Digite a comando da versão edge do aplicativo","Versão edge:")
+                +input("text","beta","Digite a comando da versão beta do aplicativo","Versão beta:")
+                +input("text","candidate","Digite a comando da versão candidate do aplicativo","Versão candidate:")
+
+            fieldset.container-fluid
+                legend Pacote flatpak:
+                +input("text","flatpak","Digite o comando da flatpak do aplicativo","Flatpak:")
+        
+            input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('POST', 'aplicativo')")
+
+
+include ../rodape

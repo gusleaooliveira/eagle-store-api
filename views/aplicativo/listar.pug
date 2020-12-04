@@ -1,0 +1,14 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    table(class="table striped")
+        tr 
+            th Aplicativo
+        each item in valores
+            tr
+                td
+                    a(href="/view/aplicativo/listar/"+item.id) #{item.nome}
+
+
+include ../rodape

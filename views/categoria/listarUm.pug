@@ -1,0 +1,21 @@
+include ../cabecalho 
+include ../menu
+
+div.container-fluid
+    if valores == null
+        p Escolha uma 
+            a(href="/view/categoria/listar/") categoria 
+            
+    else
+        table(class="table striped")
+            tr
+                th Categoria
+                th Icone
+                th Apagar
+            tr 
+                td #{valores.categoria} 
+                td #{valores.icone}
+                td
+                    a(href="", onclick="crud('DELETE', 'categoria', '"+valores.id+"')") Apagar
+
+include ../rodape
