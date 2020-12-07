@@ -1,4 +1,17 @@
 include ../cabecalho 
 include ../menu
 
-include ../rodape
+div.container-fluid
+    if valores == null
+        p Escolha um 
+            a(href="/view/tipo/listar") tipo de usuário
+    else
+        table(class="table triped")
+            tr
+                th Tipo de usuário
+            tr
+                td #{valores.tipo}
+                td
+                    a(href="", onclick="crud('DELETE', 'tipo', "+valores.id+")") Apagar
+
+include ../rodape 

@@ -14,7 +14,7 @@ exports.formListar = (req, res, next) => {
     renderizarFormComplexo(Tipo, res, 'tipo/listar');
 }
 exports.formListarUm = (req, res, next) => {
-    renderizarFormListarUm(Tipo, res, 'tipo/listarUm');
+    renderizarFormListarUm(Tipo, res, req, 'tipo/listarUm');
 }
 exports.queryInserir = (req, res, next) => {
     queryInserir(Tipo, res, req);

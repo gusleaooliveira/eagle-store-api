@@ -24,7 +24,7 @@ exports.renderizarFormListarUm = (Colecao, res, req, formulario) => {
             });
     }
     else{
-        Colecao.findById(req.params.id, (erro, valores) => {
+        Colecao.find({_id: req.params.id}, (erro, valores) => {
             mostrar(res, erro, valores, formulario);
         });
     }

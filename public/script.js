@@ -118,4 +118,28 @@ function crud(metodo, formulario, id) {
             executarBasico(metodo, url);
         }
     }
+    if(formulario == 'tipo'){
+        if(metodo == 'POST'){
+            corpo = JSON.stringify({
+                'tipo': getById('tipo')
+            });
+            console.log(corpo);
+            url = '/view/tipo/';
+
+            executar(metodo, cabecalho, url, corpo);
+        }
+        if(metodo == 'PUT'){
+            corpo = JSON.stringify({
+                'tipo': getById('tipo')
+            });
+            url = `/view/aplicativo/${getById('id')}`;
+
+            executar(metodo, cabecalho, url, corpo);
+        }
+        if(metodo == 'DELETE'){
+            url = `/view/aplicativo/${id}`;
+            
+            executarBasico(metodo, url);
+        }
+    }
 }

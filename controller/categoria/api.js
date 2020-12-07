@@ -15,4 +15,4 @@ exports.alterar = (req, res, next) => {
 } 
 exports.apagar = (req, res, next) => {
     apagar(Categoria, res, req);
-}
+} 

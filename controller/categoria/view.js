@@ -24,4 +24,4 @@ exports.queryAlterar = (req, res, next) => {
 }
 exports.queryApagar = (req, res, next) => {
     queryApagar(Categoria, res, req)
-}
+} 

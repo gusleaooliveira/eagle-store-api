@@ -4,8 +4,7 @@ const   mongoose = require('mongoose'),
 mongoose.Promise = global.Promise;
 
 let Tipo = new Schema({
-    tipo: { type: String, default: ['Administrador', 'Usuário Padrão', 'Desenvolvedor'] },
-    valor: { type: Number, default: 0 }
+    tipo: String
 }, {
     versionKey: false
 });

@@ -14,9 +14,11 @@ const { json, urlencoded } = require('body-parser'),
         tipoView           = require('./routes/tipo/view'),
         usuarioApi         = require('./routes/usuario/api'),
         usuarioView        = require('./routes/usuario/view'),
+        comentarioApi         = require('./routes/comentario/api'),
+        comentarioView        = require('./routes/comentario/view'),
         Log                = require('./model/log/index');
 
-let urlBase = `http://localhost:${process.env.PORT}/`,
+let urlBase = `http://localhost:${process.env.PORT}/api/`,
     app = express();
 
 mongoose.connect(process.env.MONGO_URL, {
@@ -86,12 +88,14 @@ app.use('/api/categoria',   categoriaApi);
 app.use('/api/tipo',        tipoApi);
 app.use('/api/usuario',     usuarioApi);
 app.use('/api/log',         logApi);
+app.use('/api/comentario',  comentarioApi);
 
 app.use('/view/aplicativo', aplicativoView);
 app.use('/view/categoria',  categoriaView);
 app.use('/view/tipo',       tipoView);
 app.use('/view/usuario',    usuarioView);
 app.use('/view/log',        logView);
+app.use('/view/comentario', comentarioView);
 
 app.listen(process.env.PORT, () => {
     console.log(`Local: ${urlBase}`);

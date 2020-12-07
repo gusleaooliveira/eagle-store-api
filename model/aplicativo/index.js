@@ -11,11 +11,13 @@ let Aplicativo = new Schema({
     licenca: String,
     comandoSnap: Array,
     comandoFlatpak: String,
+    icone: String,
     categorias: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'Categoria' }
     ]
 }, {
     versionKey: false
 });
+
 
 module.exports = mongoose.model('Aplicativo', Aplicativo);

@@ -1,4 +1,10 @@
 include ../cabecalho 
 include ../menu
 
-include ../rodape
+form(action="", onsubmit="return false", method="")
+    div.container-fluid
+        +input("text","tipo","Digite o novo tipo de usuário","Tipo de usuário:")
+        input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('POST', 'tipo')")
+
+
+include ../rodape 
