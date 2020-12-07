@@ -1,4 +1,15 @@
 include ../cabecalho 
 include ../menu
 
+div.container-fluid
+    table(class="table striped")
+        tr
+            th Usuário
+        each item in valores
+            tr
+                td
+                    a(href="/view/usuario/listar/"+item.id) #{item.nome}
+
+
+
 include ../rodape

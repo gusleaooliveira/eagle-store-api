@@ -1,4 +1,25 @@
 include ../cabecalho 
 include ../menu
+ 
+
+div.container-fluid
+    form(action="", onsubmit="return false", method="")
+        div.container-fluid
+            label(for="id") Usuário:
+            select(id="id", class="form-control")
+                each item in valores1
+                    option(value=item.id) #{item.nome}
+            label(for="tipo") Tipo de usuário:
+            select(id="tipo", class="form-control")
+                each item in valores2
+                    option(value=item.id) #{item.tipo}
+            +input("text","nome","Digite o nome do usuário","Nome:")
+            +input("text","sobrenome","Digite o sobrenome do usuário","Sobrenome:")
+            +input("email","email","Digite o email do usuário","Email:")
+            +input("text","usuario","Digite o nome usuario do usuário","Nome de Usuário:")
+            +input("password","senha","Digite a senha do usuário","Senha:")
+            
+            input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('PUT', 'usuario')")
+
 
 include ../rodape

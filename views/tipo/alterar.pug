@@ -1,4 +1,15 @@
 include ../cabecalho 
 include ../menu
 
+div.container-fluid 
+    form(action="", onsubmit="return false", method="")
+    div.container-fluid
+        label(for="id") Selecione qual editar:
+        select(id="id", class="form-control")
+            each item in valores
+                option(value=item._id) #{item.tipo}
+        +input("text","tipo","Digite o novo tipo de usuário","Tipo de usuário:")
+        input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('PUT', 'tipo')")
+
+
 include ../rodape 

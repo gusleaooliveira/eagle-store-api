@@ -23,8 +23,16 @@ exports.renderizarFormListarUm = (Colecao, res, req, formulario) => {
                 mostrar(res, erro, valores, formulario)
             });
     }
+    if(formulario == 'usuario/listarUm'){
+        Colecao
+                .findOne({_id: req.params.id})
+                .populate('tipo')
+                .exec((erro, valores) => {
+                    mostrar(res, erro, valores, formulario)
+                })
+    }
     else{
-        Colecao.find({_id: req.params.id}, (erro, valores) => {
+        Colecao.findById(req.params.id, (erro, valores) => {
             mostrar(res, erro, valores, formulario);
         });
     }

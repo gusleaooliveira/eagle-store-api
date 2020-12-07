@@ -1,4 +1,28 @@
 include ../cabecalho 
 include ../menu
 
+div.container-fluid
+    if valores==null
+        p Escolha um
+            a(href="/view/usuario/listar/") usuário
+    else
+
+        table(class="table striped")
+            tr
+                th Primeiro nome
+                th Tipo
+                th Email
+                th Usuário
+                th Apagar
+            
+            each item in valores
+                tr
+                    td #{item.nome}
+                    td
+                        a(href="/view/tipo/listar/"+item.tipo[0]._id) #{item.tipo[0].tipo}
+                    td #{item.email}
+                    td #{item.usuario}
+                    td 
+                        a(href="", onclick="crud('DELETE', 'usuario', '"+item.id+"')") Apagar
+                        
 include ../rodape

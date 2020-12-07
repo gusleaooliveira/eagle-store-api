@@ -132,12 +132,46 @@ function crud(metodo, formulario, id) {
             corpo = JSON.stringify({
                 'tipo': getById('tipo')
             });
-            url = `/view/aplicativo/${getById('id')}`;
+            url = `/view/tipo/${getById('id')}`;
 
             executar(metodo, cabecalho, url, corpo);
         }
         if(metodo == 'DELETE'){
-            url = `/view/aplicativo/${id}`;
+            url = `/view/tipo/${id}`;
+            
+            executarBasico(metodo, url);
+        }
+    }
+    if(formulario == 'usuario'){
+        if(metodo == 'POST'){
+            corpo = JSON.stringify({
+                'tipo': [ getById('tipo') ],
+                'nome': getById('nome'),
+                'sobrenome': getById('sobrenome'),
+                'email': getById('email'),
+                'usuario': getById('usuario'),
+                'senha': getById('senha')
+            });
+            console.log(corpo);
+            url = '/view/usuario/';
+
+            executar(metodo, cabecalho, url, corpo);
+        }
+        if(metodo == 'PUT'){
+            corpo = JSON.stringify({
+                'tipo': [ getById('tipo') ],
+                'nome': getById('nome'),
+                'sobrenome': getById('sobrenome'),
+                'email': getById('email'),
+                'usuario': getById('usuario'),
+                'senha': getById('senha')
+            });
+            url = `/view/usuario/${getById('id')}`;
+
+            executar(metodo, cabecalho, url, corpo);
+        }
+        if(metodo == 'DELETE'){
+            url = `/view/usuario/${id}`;
             
             executarBasico(metodo, url);
         }

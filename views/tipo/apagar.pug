@@ -1,4 +1,13 @@
 include ../cabecalho 
 include ../menu
 
+div.container-fluid
+    table(class="table striped")
+        tr
+            th Apagar
+        each item in valores
+            tr
+                td
+                    a(href="", onclick="crud('DELETE', 'tipo', '"+item.id+"')") #{item.tipo}
+
 include ../rodape 
