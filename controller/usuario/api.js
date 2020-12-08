@@ -8,7 +8,7 @@ exports.listarUm = (req, res, next) => {
     listarUm(Usuario, res, req);
 }
 exports.inserir = (req, res, next) => {
-    inserir(Usuario, res, req);
+    inserir(Usuario, res, req, true);
 }
 exports.alterar = (req, res, next) => {
     alterar(Usuario, res, req);

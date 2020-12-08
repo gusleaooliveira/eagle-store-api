@@ -18,7 +18,7 @@ exports.formListarUm = (req, res, next) => {
     renderizarFormListarUm(Usuario, res, req, 'usuario/listarUm');
 }
 exports.queryInserir = (req, res, next) => {
-    queryInserir(Usuario, res, req);
+    queryInserir(Usuario, res, req, true);
 }
 exports.queryAlterar = (req, res, next) => {
     queryAlterar(Usuario, res, req);

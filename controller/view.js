@@ -1,3 +1,5 @@
+let nodemailer = require('nodemailer');
+
 exports.renderizarFormSimples = (res, formulario) => {
     renderizar(res, formulario);
 }
@@ -38,11 +40,36 @@ exports.renderizarFormListarUm = (Colecao, res, req, formulario) => {
     }
 }
 
-exports.queryInserir = (Colecao, res, req) => {
-    let novo =  new Colecao(req.body);
-    novo.save((erro, valores) => {
-        mostrar(res, erro, valores, 'sucesso');
-    });
+exports.queryInserir = (Colecao, res, req, usuario=false) => {
+    if(usuario == false){
+        let novo =  new Colecao(req.body);
+        novo.save((erro, valores) => {
+            mostrar(res, erro, valores, 'sucesso');
+        });
+    }
+    else{
+        let novoUsuario = new Colecao(req.body);
+            novoUsuario.save((erro, valores) => {
+                if(erro)res.send(erro)
+                else {
+                    let transportador = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: { user: process.env.EMAIL, pass: process.env.PASSWORD }
+                    });
+                    let mailOptions = {
+                        from: process.env.EMAIL,
+                        to: valores.email,
+                        subject: 'Olá somos da Eagle Store!!!!!!!',
+                        text: `Olá ${valores.nome}, você se increveu para usar a Eagle Store. Agora podes alterar os dados contidos na eagle store!`
+                    }
+                    transportador.sendMail(mailOptions, (erro, info) => {
+                        if(erro)console.log(erro);
+                        else console.log(info);
+                    })
+                    res.send(valores)
+                }
+            })
+    }
 }
 exports.queryAlterar = (Colecao,res, req) => {
     Colecao.findOneAndUpdate({_id: req.params.id}, req.body, {nre: true}, (erro, valores) => {

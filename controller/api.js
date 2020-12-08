@@ -1,3 +1,6 @@
+let nodemailer = require('nodemailer'), 
+    Log = require('../model/log/index');
+
 exports.listar = (Colecao, res, req=null, comentario=false) => {
     if(comentario == false){
         Colecao.find({}, (erro, valores) => {
@@ -24,11 +27,36 @@ exports.listarUm = (Colecao, res, req, tipo=false) => {
                 });
     }
 }
-exports.inserir = (Colecao, res, req) => {
-    let novo = new Colecao(req.body);
-    novo.save((erro, valores) => {
-        mostrar(res, erro, valores);
-    });
+exports.inserir = (Colecao, res, req, usuario=false) => {
+    if(usuario == false){
+        let novo = new Colecao(req.body);
+        novo.save((erro, valores) => {
+            mostrar(res, erro, valores);
+        });
+    }
+    else {
+            let novoUsuario = new Colecao(req.body);
+            novoUsuario.save((erro, valores) => {
+                if(erro)res.send(erro)
+                else {
+                    let transportador = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: { user: process.env.EMAIL, pass: process.env.PASSWORD }
+                    });
+                    let mailOptions = {
+                        from: process.env.EMAIL,
+                        to: valores.email,
+                        subject: 'Olá somos da Eagle Store!!!!!!!',
+                        text: `Olá ${valores.nome}, você se increveu para usar a Eagle Store. Agora podes escrever seus comentários no site!`
+                    }
+                    transportador.sendMail(mailOptions, (erro, info) => {
+                        if(erro)console.log(erro);
+                        else console.log(info);
+                    })
+                    res.send(valores)
+                }
+            })
+    }
 }
 exports.alterar = (Colecao, res, req) => {
     Colecao.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (erro, valores) => {
@@ -60,6 +88,6 @@ exports.queryPesquisarCategoria = (Colecao, res, req) => {
 }
 
 function mostrar(res, erro, valores) {
-    if(erro) res.render('erro', {erro});
+    if(erro) res.send(erro);
     res.send(valores); 
 }
