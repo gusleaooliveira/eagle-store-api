@@ -60,6 +60,6 @@ exports.queryPesquisarCategoria = (Colecao, res, req) => {
 }
 
 function mostrar(res, erro, valores) {
-    if(erro) res.send(erro);
+    if(erro) res.render('erro', {erro});
     res.send(valores); 
 }

@@ -8,7 +8,7 @@ exports.renderizarFormComplexo = (Colecao, res, formulario) => {
 }
 exports.renderizarFormAlterar = (Colecao, Colecao2, res, formulario) => {
     Colecao.find({}, (erro, valores1) => {
-        if(erro) res.redirect('erro', {erro});
+        if(erro) res.render('erro', {erro});
         Colecao2.find({}, (erro, valores2) => {
             mostrarDuplo(res, erro, valores1, valores2, formulario);
         });
@@ -59,10 +59,10 @@ function renderizar(res, formulario){
     res.render(formulario)
 }
 function mostrarDuplo(res, erro, valores1, valores2, formulario) {
-    if(erro) res.redirect('erro', {erro});
+    if(erro) res.render('erro', {erro});
     res.render(formulario, {valores1, valores2});
 }
 function mostrar(res, erro, valores, formulario) {
-    if(erro) res.redirect('erro', {erro});
+    if(erro) res.render('erro', {erro});
     res.render(formulario, {valores})
 }

@@ -1,14 +1,15 @@
 const   controller = require('../../controller/usuario/view'),
+        controllerLogin = require('../../controller/login/index'),
         router = require('express').Router();
 
-router.get('/cadastrar', controller.formCadastrar);
-router.get('/alterar', controller.formAlterar);
-router.get('/apagar', controller.formApagar);
-router.get('/listar', controller.formListar);
-router.get('/listar/:id', controller.formListarUm);
+router.get('/cadastrar', controllerLogin.verificaJwt, controller.formCadastrar);
+router.get('/alterar',  controllerLogin.verificaJwt,controller.formAlterar);
+router.get('/apagar',  controllerLogin.verificaJwt,controller.formApagar);
+router.get('/listar',  controllerLogin.verificaJwt,controller.formListar);
+router.get('/listar/:id', controllerLogin.verificaJwt, controller.formListarUm);
 
-router.post('/', controller.queryInserir);
-router.put('/:id', controller.queryAlterar);
-router.delete('/:id', controller.queryApagar);
+router.post('/',  controllerLogin.verificaJwt,controller.queryInserir);
+router.put('/:id',  controllerLogin.verificaJwt,controller.queryAlterar);
+router.delete('/:id',  controllerLogin.verificaJwt, controller.queryApagar);
 
 module.exports = router;

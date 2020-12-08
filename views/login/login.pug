@@ -1,0 +1,12 @@
+include ../cabecalho 
+include ../menu
+ 
+form(action="", onsubmit="return false", method="post")
+    div.container-fluid
+        +input("text","usuario","Digite a seu usuário","Usuário ou email:")
+        +input("password","senha","Digite a sua senha","Senha:")
+        input(type="submit", value="Salvar", class="btn btn-success btn-block", onclick="crud('POST', 'login')")
+
+
+
+include ../rodape

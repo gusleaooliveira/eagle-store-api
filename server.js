@@ -4,6 +4,7 @@ const { json, urlencoded } = require('body-parser'),
         express            = require('express'),
         mongoose           = require('mongoose'),
         cors               = require('cors'),
+        cookieParser       = require('cookie-parser'),
         aplicativoApi      = require('./routes/aplicativo/api'),
         aplicativoView     = require('./routes/aplicativo/view'),
         categoriaApi       = require('./routes/categoria/api'),
@@ -14,8 +15,10 @@ const { json, urlencoded } = require('body-parser'),
         tipoView           = require('./routes/tipo/view'),
         usuarioApi         = require('./routes/usuario/api'),
         usuarioView        = require('./routes/usuario/view'),
-        comentarioApi         = require('./routes/comentario/api'),
-        comentarioView        = require('./routes/comentario/view'),
+        comentarioApi      = require('./routes/comentario/api'),
+        comentarioView     = require('./routes/comentario/view'),
+        login              = require('./routes/login/index'),
+        defautView         = require('./routes/index'),
         Log                = require('./model/log/index');
 
 let urlBase = `http://localhost:${process.env.PORT}/api/`,
@@ -55,10 +58,13 @@ mongoose.connect(process.env.MONGO_URL, {
 
 mongoose.Promise = global.Promise;
 
+app.set('view engine', 'pug')
+
 
 app.use(json());
 app.use(urlencoded());
 app.use(cors({ url: urlBase, credentials: true }));
+app.use(cookieParser(process.env.SECRET))
 app.use((req, res, next) => {
     let d = new Date();
     let log = {
@@ -66,6 +72,8 @@ app.use((req, res, next) => {
         hora: `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`,
         mensagem: `Requisição (${req.method}) ${req.url}`,
         corpo: Object.values(req.body),
+        cookieSemSeguranca: Object.values(req.cookies),
+        cookieComSeguranca: Object.values(req.signedCookies),
         metodo: req.method,
         url: req.url
     };
@@ -74,12 +82,11 @@ app.use((req, res, next) => {
         if(erro) console.error(erro);
         console.log(valores);
     });
-    console.log(req.statusCode);
     next();
 });
 
 
-app.set('view engine', 'pug')
+
 
 app.use('/static', express.static(__dirname+'/public'));
 
@@ -96,6 +103,11 @@ app.use('/view/tipo',       tipoView);
 app.use('/view/usuario',    usuarioView);
 app.use('/view/log',        logView);
 app.use('/view/comentario', comentarioView);
+app.use('/view/login', login)
+
+app.use('/', defautView)
+
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Local: ${urlBase}`);

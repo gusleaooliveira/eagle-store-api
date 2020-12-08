@@ -9,6 +9,8 @@ let Log = new Schema({
     metodo: { type: String, default: "GET" },
     url: { type: String, default: "/" },
     corpo: { type: Array },
+    cookieSemSeguranca: { type: Array },
+    cookieComSeguranca: { type: Array },
     mensagem: { type: String, required: true },
     dataRequisicaoDB: { type: Date, default: Date.now }
 }, {

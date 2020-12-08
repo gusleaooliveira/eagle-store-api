@@ -176,4 +176,16 @@ function crud(metodo, formulario, id) {
             executarBasico(metodo, url);
         }
     }
+    if(formulario == 'login'){
+        if(metodo == 'POST'){
+            corpo = JSON.stringify({
+                'usuario': getById('usuario'),
+                'senha': getById('senha')
+            });
+            console.log(corpo);
+            url = '/view/login/';
+
+            executar(metodo, cabecalho, url, corpo);
+        }
+    }
 }
