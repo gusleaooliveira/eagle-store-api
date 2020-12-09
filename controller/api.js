@@ -86,6 +86,14 @@ exports.queryPesquisarCategoria = (Colecao, res, req) => {
                 mostrar(res, erro, valores)
             });
 }
+exports.queryPesquisarNome = (Colecao, res, req) => {
+    Colecao.find({nome: { $regex: new RegExp(req.params.nome), $options: 'i' }})
+            .populate('categorias')
+            .exec((erro, valores) => {
+                console.log('\t teste =====>',valores);
+                mostrar(res, erro, valores)
+            })
+}
 
 function mostrar(res, erro, valores) {
     if(erro) res.send(erro);

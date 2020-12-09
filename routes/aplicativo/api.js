@@ -1,6 +1,7 @@
 const   controller = require('../../controller/aplicativo/api'),
         router = require('express').Router();
 
+router.get('/pesquisar/:nome', controller.queryPesquisarNome)
 router.get('/categoria/:id', controller.queryPesquisarCategoria)
 router.get('/destaque/:id', controller.queryPesquisarQuantidade);
 router.get('/destaque', controller.queryPesquisar);

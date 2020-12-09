@@ -1,4 +1,4 @@
-const { listar, listarUm, inserir, alterar, apagar, queryPesquisarDestaque, queryPesquisarDestaques, queryPesquisarCategoria } = require('../api'),
+const { listar, listarUm, inserir, alterar, apagar, queryPesquisarDestaque, queryPesquisarDestaques, queryPesquisarCategoria, queryPesquisarNome } = require('../api'),
         Aplicativo = require('../../model/aplicativo/index');
 
 exports.listar = (req, res, next) => {
@@ -24,4 +24,7 @@ exports.queryPesquisarQuantidade = (req, res, next) => {
 }
 exports.queryPesquisarCategoria = (req, res, next) =>{
     queryPesquisarCategoria(Aplicativo, res, req);
+}
+exports.queryPesquisarNome = (req, res, next) => {
+    queryPesquisarNome(Aplicativo, res, req)
 }
