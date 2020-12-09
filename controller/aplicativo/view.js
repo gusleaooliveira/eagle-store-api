@@ -18,6 +18,9 @@ exports.formListarUm = (req, res, next) => {
     renderizarFormListarUm(Aplicativo, res, req, 'aplicativo/listarUm');
 }
 exports.queryInserir = (req, res, next) => {
+    if(req.file){
+        console.log(req.file);
+    }
     queryInserir(Aplicativo, res, req);
 }
 exports.queryAlterar = (req, res, next) => {

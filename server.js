@@ -18,6 +18,7 @@ const { json, urlencoded } = require('body-parser'),
         comentarioApi      = require('./routes/comentario/api'),
         comentarioView     = require('./routes/comentario/view'),
         login              = require('./routes/login/index'),
+        loginApi           = require('./routes/login/api'),
         defautView         = require('./routes/index'),
         Log                = require('./model/log/index');
 
@@ -96,6 +97,7 @@ app.use('/api/tipo',        tipoApi);
 app.use('/api/usuario',     usuarioApi);
 app.use('/api/log',         logApi);
 app.use('/api/comentario',  comentarioApi);
+app.use('/api/login', loginApi)
 
 app.use('/view/aplicativo', aplicativoView);
 app.use('/view/categoria',  categoriaView);
