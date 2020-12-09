@@ -33,7 +33,7 @@ exports.login = (req, res, next) => {
                         console.log(erro, usuario);
                         if(usuario.tipo[0]._id == "5fce8224cedc06a05dcdd6d2"){
                             let token = jwt.sign({usuario}, process.env.SECRET, {expiresIn: 300000});
-                            res.cookie('token', token, {signed: true }).redirect('aplicativo/listar')
+                            res.cookie('token', token, {signed: true }).render('aplicativo/listar')
                         }
                         else{
                             res.render('erro', {erro: 'Faça login como Administrador!!!!'})
@@ -45,6 +45,6 @@ exports.login = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
     if(req.cookies || req.signedCookies){
-        res.clearCookie('token').redirect('aplicativo/listar');
+        res.clearCookie('token').render('aplicativo/listar');
     }
 }
