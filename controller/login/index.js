@@ -11,11 +11,11 @@ exports.verificaJwt = (req, res, next) => {
     else if(req.signedCookies.token){token = req.signedCookies.token}
     else {
         if(req.headers['x-access-token']){token = req.headers['x-access-token']}
-        else{res.render('erro', {erro: 'nenhum token fornecido'})}
+        else{res.render('erro', {erro: 'Faça login como Administrador!!!!'})}
     }
     console.log('token ====> ', token);
     jwt.verify(token, process.env.SECRET, (erro, decoded) => {
-        if(erro) { res.render('erro', {erro: 'erro ao fazer login'})}
+        if(erro) { res.render('erro', {erro: 'Faça login como Administrador!!!!'})}
         req.userId = decoded.id;
         next()
     })
@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
                             res.cookie('token', token, {signed: true }).redirect('aplicativo/listar')
                         }
                         else{
-                            res.render('erro', {erro: 'Faça login com um Administrador'})
+                            res.render('erro', {erro: 'Faça login como Administrador!!!!'})
                         }
                     }
                 })
