@@ -53,6 +53,7 @@ exports.inserir = (Colecao, res, req, usuario=false) => {
                         if(erro)console.log(erro);
                         else console.log(info);
                     })
+                    
                     res.send(valores)
                 }
             })
