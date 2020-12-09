@@ -48,6 +48,7 @@ exports.queryInserir = (Colecao, res, req, usuario=false) => {
         });
     }
     else{
+        
         let novoUsuario = new Colecao(req.body);
             novoUsuario.save((erro, valores) => {
                 if(erro)res.send(erro)
