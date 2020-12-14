@@ -3,18 +3,16 @@ const   jwt = require('jsonwebtoken'),
 
 exports.verificaJwt = (req, res, next) => {
     let token = null;
-    if(req.cookies.token){token = req.cookie.token }
-    else if(req.signedCookies.token){token = req.signedCookies.token}
-    else {
-        if(req.headers['x-access-token']){token = req.headers['x-access-token']}
-        else{res.send({erro: 'nenhum token fornecido'})}
+    if(req.headers['x-access-token']){
+        token = req.headers['x-access-token']
+        jwt.verify(token, process.env.SECRET, (erro, decoded) => {
+            console.log('erro=>',erro);
+            if(erro) { res.send({erro: 'erro ao fazer login'})}
+            req.userId = decoded.id;
+            next()
+        })
     }
-    console.log('token ====> ', token);
-    jwt.verify(token, process.env.SECRET, (erro, decoded) => {
-        if(erro) { res.send({erro: 'erro ao fazer login'})}
-        req.userId = decoded.id;
-        next()
-    })
+    else{res.send({erro: 'nenhum token fornecido'})}    
 }
 
 exports.login = (req, res, next) => {
@@ -27,15 +25,13 @@ exports.login = (req, res, next) => {
                     if(usuario == null)res.send({erro: 'Nenhum usuário encontrado!'})
                     else {
                         console.log(erro, usuario);
-                        let token = jwt.sign({usuario}, process.env.SECRET, {expiresIn: 300});
-                        res.cookie('token', token, {signed: true }).send({token})
+                        let token = jwt.sign({usuario}, process.env.SECRET, {expiresIn: 3000});
+                        res.send({token, usuario})
                     }
                 })
     }
 }
 
 exports.logout = (req, res, next) => {
-    if(req.cookies || req.signedCookies){
-        res.clearCookie('token').render('index');
-    }
+    
 }

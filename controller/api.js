@@ -95,6 +95,13 @@ exports.queryPesquisarNome = (Colecao, res, req) => {
                 mostrar(res, erro, valores)
             })
 }
+exports.queryPesquisarUsuario = (Colecao, res, req) => {
+    Colecao.find({usuario: req.query.usuario, senha: req.query.senha})
+            .populate('tipo')
+            .exec((erro, valores) => {
+                mostrar(res, erro, valores)
+            })
+}
 
 function mostrar(res, erro, valores) {
     if(erro) res.send(erro);

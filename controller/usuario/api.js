@@ -1,4 +1,4 @@
-const { listar, listarUm, inserir, alterar, apagar } = require('../api'),
+const { listar, listarUm, inserir, alterar, apagar, queryPesquisarUsuario } = require('../api'),
         Usuario = require('../../model/usuario/index');
 
 exports.listar = (req, res, next) => {
@@ -15,4 +15,7 @@ exports.alterar = (req, res, next) => {
 }
 exports.apagar = (req, res, next) => {
     apagar(Usuario, res, req);
+}
+exports.pesquisar = (req, res, next) => {
+    queryPesquisarUsuario(Usuario, res, req)
 }
